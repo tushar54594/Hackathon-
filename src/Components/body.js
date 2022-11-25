@@ -12,21 +12,21 @@ function Body() {
           chatbot for finding all your answers
         </p>
       </div>
-      <div className="form">
+      {/* <div className="form">
         <h2>Registration Form</h2>
-        Name
+        <label className="head">Name</label>
         <input type="text" name="name" placeholder="Enter you name" />
-        Age
+        <label className="head">Age</label>
         <input type="text" name="age" placeholder="Enter you age" />
-        Gender
+        <label className="head">Gender</label>
         <input type="text" name="gender" placeholder="Enter you gender" />
-        Email
-        <input type="text" name="email" placeholder="Enter you name" />
-        DateOfBirth
+        <label className="head">Email</label>
+        <input type="text" name="email" placeholder="Enter you email" />
+        <label className="head">DateOfBirth</label>
         <input type="text" name="dob" placeholder="Enter you email" />
-        Mobile Number
+        <label className="head">Mobile Number</label>
         <input type="text" name="dob" placeholder="Enter you email" />
-        City
+        <label className="head">City</label>
         <input type="text" name="city" placeholder="Enter you city" />
         State
         <input type="text" name="state" placeholder="Enter you state" />
@@ -34,8 +34,9 @@ function Body() {
         <input type="text" name="pincode" placeholder="Enter you pincode" />
         History
         <textarea rows="3" name="history" cols="40" placeholder="Enter the patient's history" />
+        <button className="btn">Register</button>
+      </div> */}
       </div>
-    </div>
   );
 }
 
