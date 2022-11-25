@@ -1,0 +1,13 @@
+.navbar {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    height: 80px;
+    width: 80px;
+}
+
+.heading {
+    font-size: 25px;
+}

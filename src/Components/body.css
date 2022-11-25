@@ -1,0 +1,28 @@
+.main {
+    display: flex;
+    justify-content: center;
+}
+
+.main-img {
+    height: 550px;
+    width: 450px;
+    margin-top: 20px;
+}
+
+.para {
+    display: flex;
+    width: 30%;
+    flex-wrap: wrap;
+    font-size: 30px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 40px;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
