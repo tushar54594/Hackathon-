@@ -7,7 +7,7 @@ function Chatbot() {
     // const handleClick = event => {
     //   setIsVisible(current => !current);
     // };
-
+    
   return (
     <div className="chatbot">
       <div className="chat-heading">
