@@ -56,6 +56,7 @@ print("for svm: ")
 print(model.score(x_test,y_test))
 
 importances = clf.feature_importances_
+# Return the reversed indices of the sorted array.
 indices = np.argsort(importances)[::-1]
 features = cols
 
@@ -90,6 +91,7 @@ def calc_condition(exp,days):
 
 def getDescription():
     global description_list
+    # short description of diseases
     with open('MasterData/symptom_Description.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
@@ -102,6 +104,7 @@ def getDescription():
 
 def getSeverityDict():
     global severityDictionary
+    # weights for each disease
     with open('MasterData/symptom_severity.csv') as csv_file:
 
         csv_reader = csv.reader(csv_file, delimiter=',')
@@ -131,6 +134,7 @@ def getInfo():
     name=input("")
     print("Hello, ",name)
 
+# based on the entered symptom search for similarities from database
 def check_pattern(dis_list,inp):
     pred_list=[]
     inp=inp.replace(' ','_')
@@ -165,6 +169,7 @@ def print_disease(node):
 
 def tree_to_code(tree, feature_names):
     tree_ = tree.tree_
+    # gather all the symptoms
     feature_name = [
         feature_names[i] if i != _tree.TREE_UNDEFINED else "undefined!"
         for i in tree_.feature
@@ -182,6 +187,7 @@ def tree_to_code(tree, feature_names):
             print("searches related to input: ")
             for num,it in enumerate(cnf_dis):
                 print(num,")",it)
+            # if there are many similarities found choose among them for accuracy
             if num!=0:
                 print(f"Select the one you meant (0 - {num}):  ", end="")
                 conf_inp = int(input(""))
@@ -203,6 +209,8 @@ def tree_to_code(tree, feature_names):
             break
         except:
             print("Enter valid input.")
+    # start traversing the decision tree
+    # traverse until all the similar symptoms are found and tracked
     def recurse(node, depth):
         indent = "  " * depth
         if tree_.feature[node] != _tree.TREE_UNDEFINED:
@@ -214,11 +222,15 @@ def tree_to_code(tree, feature_names):
             else:
                 val = 0
             if  val <= threshold:
+                # left traversal
                 recurse(tree_.children_left[node], depth + 1)
             else:
+                # if a similarity is found keeptack of it and move right
                 symptoms_present.append(name)
+                # right traversal
                 recurse(tree_.children_right[node], depth + 1)
-        else:
+
+        else: # loop through the tracked ones by asking questions for more accuracy to distinguish btw diseases with common symptoms
             present_disease = print_disease(tree_.value[node])
             # print( "You may have " +  present_disease )
             red_cols = reduced_data.columns 
@@ -228,6 +240,7 @@ def tree_to_code(tree, feature_names):
             #     print("symptoms present  " + str(list(symptoms_present)))
             # print("symptoms given "  +  str(list(symptoms_given)) )
             print("Are you experiencing any ")
+            # loop starts
             symptoms_exp=[]
             for syms in list(symptoms_given):
                 inp=""
@@ -240,10 +253,14 @@ def tree_to_code(tree, feature_names):
                         print("provide proper answers i.e. (yes/no) : ",end="")
                 if(inp=="yes"):
                     symptoms_exp.append(syms)
+            # end
 
+            # use the trained model to predict the disease that meets all the symptoms
             second_prediction=sec_predict(symptoms_exp)
             # print(second_prediction)
+            # consult a doctor or not based on the disease and its corresponding wt
             calc_condition(symptoms_exp,num_days)
+            # if the disease predicted is one (high accuracy)
             if(present_disease[0]==second_prediction[0]):
                 print("You may have ", present_disease[0])
                 print(description_list[present_disease[0]])
@@ -270,6 +287,7 @@ getSeverityDict()
 getDescription()
 getprecautionDict()
 getInfo()
+# send the decision tree model with the symptoms from the training data
 tree_to_code(clf,cols)
 print("----------------------------------------------------------------------------------------")
 

@@ -10,3 +10,7 @@ The dataset is split up according to these folds, where each fold has a unique s
 A model is trained and tested for each fold
 Each fold returns a metric for it's test data
 The mean and standard deviation of these metrics can then be calculated to provide a single metric for the process
+
+feature_importances_
+Feature Importance refers to techniques that calculate a score for all the input features for a given model — the scores simply represent the “importance” of each feature. 
+A higher score means that the specific feature will have a larger effect on the model that is being used to predict a certain variable.
