@@ -35,7 +35,7 @@ y = le.transform(y)
 # train test split ratio is 0.33
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.33, random_state=42)
 testx    = testing[cols]
-testy    = testing['prognosis']  
+testy    = testing['prognosis'] 
 testy    = le.transform(testy)
 
 
@@ -83,10 +83,13 @@ def calc_condition(exp,days):
     sum=0
     for item in exp:
          sum=sum+severityDictionary[item]
+    print("-----------------------------------REPORT-----------------------------------")
+    print('')
     if((sum*days)/(len(exp)+1)>13):
         print("You should take the consultation from doctor. ")
     else:
         print("It might not be that bad but you should take precautions.")
+    print("----------------------------------------------------------------------------------------")
 
 
 def getDescription():
@@ -182,6 +185,7 @@ def tree_to_code(tree, feature_names):
 
         print("\nEnter the symptom you are experiencing  \t\t",end="->")
         disease_input = input("")
+        print('')
         conf,cnf_dis=check_pattern(chk_dis,disease_input)
         if conf==1:
             print("searches related to input: ")
@@ -232,7 +236,6 @@ def tree_to_code(tree, feature_names):
 
         else: # prediction from ML model starts
             present_disease = print_disease(tree_.value[node])
-            print(present_disease)
             # print( "You may have " +  present_disease )
             red_cols = reduced_data.columns 
             symptoms_given = red_cols[reduced_data.loc[present_disease].values[0].nonzero()]
@@ -272,10 +275,12 @@ def tree_to_code(tree, feature_names):
             else:
                 print("You may have ", present_disease[0], "or ", second_prediction[0])
                 print(description_list[present_disease[0]])
+                print("----------------------------------------------------------------------------------------")
                 print(description_list[second_prediction[0]])
 
             # print(description_list[present_disease[0]])
             precution_list=precautionDictionary[present_disease[0]]
+            print("----------------------------------------------------------------------------------------")
             print("Take following measures : ")
             for  i,j in enumerate(precution_list):
                 print(i+1,")",j)
@@ -291,6 +296,7 @@ getInfo()
 # send the decision tree model with the symptoms from the training data
 tree_to_code(clf,cols)
 print("----------------------------------------------------------------------------------------")
+
 
 # There are two models being used for predicting the disease
 # The decision tree classifier uses tree approach to predict the disease based on symptoms
