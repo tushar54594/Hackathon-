@@ -1,0 +1,12 @@
+random state
+Controls how the data is shuffled before the split is implemented.
+If you don't specify the random_state in the code, then every time you run(execute) your code a new random value is generated and the train and test datasets would have different values each time.
+However, if a fixed value is assigned like random_state = 0 or 1 or 42 or any other integer then no matter how many times you execute your code the result would be the same .i.e, same values in train and test datasets.
+
+cross_val_score
+
+The number of folds is defined, by default this is 5
+The dataset is split up according to these folds, where each fold has a unique set of testing data
+A model is trained and tested for each fold
+Each fold returns a metric for it's test data
+The mean and standard deviation of these metrics can then be calculated to provide a single metric for the process
