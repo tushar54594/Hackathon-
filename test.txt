@@ -1,0 +1,11 @@
+name
+age
+gender
+email
+dob
+mobile no
+patient address
+city 
+state
+pincode
+previous history
