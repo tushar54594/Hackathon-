@@ -210,7 +210,7 @@ def tree_to_code(tree, feature_names):
         except:
             print("Enter valid input.")
     # start traversing the decision tree
-    # traverse until all the similar symptoms are found and tracked
+    # traverse until most accurate disease is found based on the symtom given and store its node value
     def recurse(node, depth):
         indent = "  " * depth
         if tree_.feature[node] != _tree.TREE_UNDEFINED:
@@ -230,8 +230,9 @@ def tree_to_code(tree, feature_names):
                 # right traversal
                 recurse(tree_.children_right[node], depth + 1)
 
-        else: # loop through the tracked ones by asking questions for more accuracy to distinguish btw diseases with common symptoms
+        else: # prediction from ML model starts
             present_disease = print_disease(tree_.value[node])
+            print(present_disease)
             # print( "You may have " +  present_disease )
             red_cols = reduced_data.columns 
             symptoms_given = red_cols[reduced_data.loc[present_disease].values[0].nonzero()]
@@ -291,3 +292,8 @@ getInfo()
 tree_to_code(clf,cols)
 print("----------------------------------------------------------------------------------------")
 
+# There are two models being used for predicting the disease
+# The decision tree classifier uses tree approach to predict the disease based on symptoms
+# regression model is also used to predict the disease after training it
+# if the predicted disease from decision tree matches with the model its a high accuracy
+# else display both
